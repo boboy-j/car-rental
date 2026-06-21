@@ -1,0 +1,387 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+  <title>鼎盛汽车租赁</title>
+
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json">
+
+  <!-- iOS 全屏/顶部栏 -->
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="鼎盛租车">
+
+  <!-- iOS 桌面图标 -->
+  <link rel="apple-touch-icon" href="icons/icon.svg">
+
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute">
+  <defs>
+    <clipPath id="headerClip" clipPathUnits="objectBoundingBox">
+      <path d="M 0,0 L 1,0 L 1,1 Q 0.5,0.75 0,1 Z"/>
+    </clipPath>
+  </defs>
+</svg>
+  <!-- ========== 页面容器 ========== -->
+  <div id="app">
+
+    <!-- ===== 首页 ===== -->
+    <div class="page" id="page-home">
+      <!-- 顶部头 -->
+      <div class="header" id="company-header">
+        <div class="header-inner">
+          <h1 class="company-name" id="home-company-name">XX汽车租赁</h1>
+          <p class="company-slogan" id="home-company-slogan">品质服务 · 安心出行</p>
+        </div>
+      </div>
+
+      <!-- 轮播 -->
+      <div class="swiper" id="home-swiper">
+        <div class="swiper-wrapper" id="swiper-wrapper">
+          <!-- JS 动态渲染 -->
+        </div>
+        <div class="swiper-dots" id="swiper-dots"></div>
+      </div>
+
+      <!-- 公司简介 -->
+      <section class="section" id="home-about">
+        <div class="section-title">
+          <span class="title-line"></span>
+          <h2>关于我们</h2>
+          <span class="title-line"></span>
+        </div>
+        <p class="about-text" id="about-text">专业汽车租赁服务商，提供高品质、高性价比的汽车租赁方案。我们拥有丰富的车型选择，完善的售后保障，让您的每一次出行都安心无忧。</p>
+      </section>
+
+      <!-- 服务优势 -->
+      <section class="section">
+        <div class="section-title">
+          <span class="title-line"></span>
+          <h2>服务优势</h2>
+          <span class="title-line"></span>
+        </div>
+        <div class="advantages">
+          <div class="advantage-item">
+            <div class="adv-icon">🚗</div>
+            <h4>车型丰富</h4>
+            <p>经济型到豪华型任选</p>
+          </div>
+          <div class="advantage-item">
+            <div class="adv-icon">💰</div>
+            <h4>价格透明</h4>
+            <p>无隐藏费用</p>
+          </div>
+          <div class="advantage-item">
+            <div class="adv-icon">🔧</div>
+            <h4>车况优良</h4>
+            <p>定期保养检测</p>
+          </div>
+          <div class="advantage-item">
+            <div class="adv-icon">📞</div>
+            <h4>24h服务</h4>
+            <p>随时响应需求</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 热门推荐 -->
+      <section class="section">
+        <div class="section-title">
+          <span class="title-line"></span>
+          <h2>热门车型</h2>
+          <span class="title-line"></span>
+        </div>
+        <div class="car-list" id="home-car-list">
+          <!-- JS 动态渲染 -->
+        </div>
+        <div class="more-link" onclick="switchTab(1)">查看全部车型 &gt;</div>
+      </section>
+
+      <!-- 联系我们 -->
+      <section class="section contact-section">
+        <div class="section-title">
+          <span class="title-line"></span>
+          <h2>联系我们</h2>
+          <span class="title-line"></span>
+        </div>
+        <div class="contact-info" id="home-contact">
+          <p>📞 电话：<a href="tel:13800000000" id="contact-phone">13800000000</a></p>
+          <p>📍 地址：<span id="contact-address">XX市XX区XX路XX号</span></p>
+          <p>🕐 营业时间：08:00 - 22:00</p>
+        </div>
+      </section>
+
+      <div class="bottom-safe-area"></div>
+    </div>
+
+    <!-- ===== 全部车型 ===== -->
+    <div class="page" id="page-cars" style="display:none;">
+      <div class="page-header">
+        <div class="page-header-inner">
+          <span class="back-btn" onclick="switchTab(0)">‹ 返回</span>
+          <h2>全部车型</h2>
+          <span></span>
+        </div>
+      </div>
+
+      <!-- 筛选栏 -->
+      <div class="filter-bar">
+        <select id="filter-brand" onchange="renderCarList()">
+          <option value="">全部品牌</option>
+        </select>
+        <select id="filter-type" onchange="renderCarList()">
+          <option value="">全部类型</option>
+        </select>
+        <select id="filter-price" onchange="renderCarList()">
+          <option value="">价格筛选</option>
+          <option value="0-200">200元以下/天</option>
+          <option value="200-500">200-500元/天</option>
+          <option value="500-1000">500-1000元/天</option>
+          <option value="1000-99999">1000元以上/天</option>
+        </select>
+      </div>
+
+      <div class="car-list full-car-list" id="full-car-list">
+        <!-- JS 动态渲染 -->
+      </div>
+      <div class="bottom-safe-area"></div>
+    </div>
+
+    <!-- ===== 车辆详情 ===== -->
+    <div class="page" id="page-detail" style="display:none;">
+      <div class="page-header">
+        <div class="page-header-inner">
+          <span class="back-btn" onclick="goBackFromDetail()">‹ 返回</span>
+          <h2>车辆详情</h2>
+          <span></span>
+        </div>
+      </div>
+      <div class="detail-content" id="detail-content">
+        <!-- JS 动态渲染 -->
+      </div>
+      <div class="detail-footer">
+        <div class="detail-price" id="detail-price">¥0 <span>/ 天</span></div>
+        <a class="detail-consult-btn" id="detail-consult-link" href="tel:13800000000">📞 立即咨询</a>
+      </div>
+      <div class="bottom-safe-area"></div>
+    </div>
+
+    <!-- ===== 管理后台 ===== -->
+    <div class="page" id="page-admin" style="display:none;">
+      <div class="page-header">
+        <div class="page-header-inner">
+          <span></span>
+          <h2>管理后台</h2>
+          <span class="save-btn" onclick="saveCompanyInfo()">保存</span>
+        </div>
+      </div>
+
+      <!-- tab切换 -->
+      <div class="admin-tabs">
+        <span class="admin-tab active" data-tab="company" onclick="switchAdminTab('company')">公司信息</span>
+        <span class="admin-tab" data-tab="cars" onclick="switchAdminTab('cars')">车辆管理</span>
+      </div>
+
+      <!-- 公司信息编辑 -->
+      <div class="admin-panel active" id="admin-company">
+        <div class="form-group">
+          <label>公司名称</label>
+          <input type="text" id="edit-company-name" placeholder="输入公司名称">
+        </div>
+        <div class="form-group">
+          <label>公司标语</label>
+          <input type="text" id="edit-company-slogan" placeholder="输入公司标语">
+        </div>
+        <div class="form-group">
+          <label>联系电话</label>
+          <input type="text" id="edit-company-phone" placeholder="输入联系电话">
+        </div>
+        <div class="form-group">
+          <label>公司地址</label>
+          <input type="text" id="edit-company-address" placeholder="输入公司地址">
+        </div>
+        <div class="form-group">
+          <label>公司简介</label>
+          <textarea id="edit-company-desc" rows="4" placeholder="输入公司介绍文字"></textarea>
+        </div>
+        <div class="form-group">
+          <label>轮播图（支持多张，自动裁剪为横版 4:3）</label>
+          <div class="upload-area" id="banner-upload-area" onclick="document.getElementById('banner-file-input').click()">
+            <span class="upload-icon">📷</span>
+            <span class="upload-text">点击选择图片</span>
+            <span class="upload-hint">支持 JPG / PNG，建议尺寸 1200×900px（横版 4:3）</span>
+          </div>
+          <input type="file" id="banner-file-input" accept="image/*" multiple style="display:none" onchange="handleBannerSelect(event)">
+          <div class="image-preview-list" id="banner-preview-list">
+            <!-- 已选轮播图预览，JS 动态渲染 -->
+          </div>
+        </div>
+      </div>
+
+      <!-- 车辆管理 -->
+      <div class="admin-panel" id="admin-cars">
+        <div class="car-form">
+          <h4 class="form-subtitle" id="car-form-title">添加车辆</h4>
+          <input type="hidden" id="edit-car-id">
+          <div class="form-group">
+            <label>车辆名称</label>
+            <input type="text" id="edit-car-name" placeholder="例如：宝马5系">
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>品牌</label>
+              <input type="text" id="edit-car-brand" placeholder="例如：宝马">
+            </div>
+            <div class="form-group">
+              <label>类型</label>
+              <select id="edit-car-type">
+                <option value="经济型">经济型</option>
+                <option value="舒适型">舒适型</option>
+                <option value="豪华型">豪华型</option>
+                <option value="SUV">SUV</option>
+                <option value="商务车">商务车</option>
+                <option value="跑车">跑车</option>
+                <option value="新能源">新能源</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label>座位数</label>
+              <input type="number" id="edit-car-seats" value="5" min="2" max="15">
+            </div>
+            <div class="form-group">
+              <label>日租价格 (¥)</label>
+              <input type="number" id="edit-car-price" placeholder="例如：500" min="0">
+            </div>
+          </div>
+          <div class="form-group">
+            <label>车辆图片（支持多张，自动裁剪为横版 4:3）</label>
+            <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()">
+              <span class="upload-icon">📷</span>
+              <span class="upload-text">点击选择图片</span>
+              <span class="upload-hint">支持 JPG / PNG，建议尺寸 1200×900px（横版 4:3）</span>
+            </div>
+            <input type="file" id="file-input" accept="image/*" multiple style="display:none" onchange="handleFileSelect(event)">
+            <div class="image-preview-list" id="image-preview-list">
+              <!-- 已选图片预览，JS 动态渲染 -->
+            </div>
+          </div>
+          <div class="form-group">
+            <label>车辆描述</label>
+            <textarea id="edit-car-desc" rows="3" placeholder="车辆特点、配置等描述"></textarea>
+          </div>
+          <div class="form-group">
+            <label>租赁说明</label>
+            <textarea id="edit-car-rental" rows="3" placeholder="租赁条件、押金、注意事项等"></textarea>
+          </div>
+          <div class="form-actions">
+            <button class="btn btn-primary" onclick="saveCar()">保存车辆</button>
+            <button class="btn btn-secondary" onclick="resetCarForm()">取消</button>
+          </div>
+        </div>
+
+        <div class="admin-car-list">
+          <h4 class="form-subtitle">已添加车辆</h4>
+          <div id="admin-car-items">
+            <!-- JS 动态渲染 -->
+          </div>
+        </div>
+      </div>
+      <div class="bottom-safe-area"></div>
+    </div>
+
+    <!-- ===== 二维码页 ===== -->
+    <div class="page" id="page-qr" style="display:none;">
+      <div class="page-header">
+        <div class="page-header-inner">
+          <span></span>
+          <h2>小程序码</h2>
+          <span></span>
+        </div>
+      </div>
+      <div class="qr-container">
+        <div class="qr-card">
+          <div class="qr-header">
+            <span class="qr-logo">🚗</span>
+            <h3 id="qr-company-name">XX汽车租赁</h3>
+          </div>
+          <div class="qr-code" id="qrcode"></div>
+          <p class="qr-tip">微信扫码进入小程序</p>
+          <p class="qr-subtip">了解更多车型 · 在线咨询</p>
+          <button class="btn btn-primary" onclick="downloadQR()">📥 保存二维码</button>
+        </div>
+      </div>
+      <div class="bottom-safe-area"></div>
+    </div>
+
+  </div>
+
+  <!-- ========== 底部 TabBar ========== -->
+  <div class="tabbar" id="tabbar">
+    <div class="tabbar-item active" data-tab="0" onclick="switchTab(0)">
+      <span class="tab-icon">🏠</span>
+      <span class="tab-text">首页</span>
+    </div>
+    <div class="tabbar-item" data-tab="1" onclick="switchTab(1)">
+      <span class="tab-icon">🚗</span>
+      <span class="tab-text">全部车型</span>
+    </div>
+    <div class="tabbar-item" data-tab="2" onclick="switchTab(2)">
+      <span class="tab-icon">⚙️</span>
+      <span class="tab-text">管理后台</span>
+    </div>
+    <div class="tabbar-item" data-tab="3" onclick="switchTab(3)">
+      <span class="tab-icon">📱</span>
+      <span class="tab-text">小程序码</span>
+    </div>
+  </div>
+
+  <!-- ========== 裁剪弹窗 ========== -->
+  <div class="crop-modal" id="crop-modal" style="display:none">
+    <div class="crop-overlay"></div>
+    <div class="crop-panel">
+      <div class="crop-header">
+        <h3>裁剪图片（横版 4:3 比例）</h3>
+        <span class="crop-close" onclick="closeCrop()">✕</span>
+      </div>
+      <div class="crop-body">
+        <div class="crop-container" id="crop-container">
+          <img id="crop-image" alt="裁剪预览">
+          <div class="crop-box" id="crop-box">
+            <div class="crop-grid"></div>
+            <div class="crop-handle crop-handle-nw"></div>
+            <div class="crop-handle crop-handle-ne"></div>
+            <div class="crop-handle crop-handle-sw"></div>
+            <div class="crop-handle crop-handle-se"></div>
+          </div>
+        </div>
+      </div>
+      <div class="crop-footer">
+        <button class="btn btn-secondary" onclick="closeCrop()">取消</button>
+        <button class="btn btn-primary" onclick="confirmCrop()">✓ 确认裁剪</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========== 提示浮层 ========== -->
+  <div class="toast" id="toast"></div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+
+<script>
+  // 注册 Service Worker（PWA 离线支持）
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.register('/sw.js').catch(function(err) {
+      console.log('SW registration failed:', err);
+    });
+  }
+</script>
+</body>
+</html>

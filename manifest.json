@@ -1,0 +1,17 @@
+{
+  "name": "鼎盛汽车租赁",
+  "short_name": "鼎盛租车",
+  "description": "品质服务 · 安心出行",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#4f46e5",
+  "theme_color": "#4f46e5",
+  "icons": [
+    {
+      "src": "icons/icon.svg",
+      "sizes": "512x512",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
