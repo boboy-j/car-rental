@@ -1,4 +1,4 @@
-const CACHE_NAME = 'car-rental-v2';
+const CACHE_NAME = 'car-rental-v3';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -7,6 +7,9 @@ const urlsToCache = [
   '/js/data.js',
   '/manifest.json',
   '/icons/icon.svg',
+  '/icons/icon-180.png',
+  '/icons/icon-192.png',
+  '/icons/icon-512.png',
 ];
 
 // 安装：预缓存资源
