@@ -84,7 +84,7 @@ input, textarea, select, button {
 
 /* === 底部安全区 === */
 .bottom-safe-area {
-  height: 16px;
+  height: calc(16px + env(safe-area-inset-bottom, 0px));
 }
 
 /* === 头部 Header === */
@@ -92,6 +92,7 @@ input, textarea, select, button {
   background: linear-gradient(135deg, var(--primary) 0%, #2563eb 100%);
   color: white;
   padding: 24px 20px 40px;
+  padding-top: calc(24px + env(safe-area-inset-top, 0px));
   text-align: center;
   position: relative;
   z-index: 2;
@@ -121,6 +122,7 @@ input, textarea, select, button {
   top: 0;
   z-index: 10;
   border-bottom: 1px solid var(--border);
+  padding-top: env(safe-area-inset-top, 0px);
 }
 .page-header-inner {
   display: flex;
