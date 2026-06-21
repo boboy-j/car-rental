@@ -1,4 +1,4 @@
-const CACHE_NAME = 'car-rental-v3';
+const CACHE_NAME = 'car-rental-v4';
 const urlsToCache = [
   '/',
   '/index.html',
